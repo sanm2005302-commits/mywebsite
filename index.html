@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Time Check</title>
+</head>
+<body>
+
+<h2>Checking registration status...</h2>
+
+<script>
+  /* ===== SET YOUR MATCH TIME HERE ===== */
+
+  // OPEN DATE & TIME
+  const openDate = "2026-02-03"; // YYYY-MM-DD
+  const openHour = 6;
+  const openMinute = 0;
+  const openAMPM = "AM";
+
+  // CLOSE DATE & TIME
+  const closeDate = "2026-02-26";
+  const closeHour = 11;
+  const closeMinute = 26;
+  const closeAMPM = "PM";
+  /* ===== LOGIC (DO NOT CHANGE) ===== */
+
+  function to24Hour(hour, ampm) {
+    if (ampm === "PM" && hour !== 12) return hour + 12;
+    if (ampm === "AM" && hour === 12) return 0;
+    return hour;
+  }
+
+  const openH = to24Hour(openHour, openAMPM);
+  const closeH = to24Hour(closeHour, closeAMPM);
+
+  const openTime = new Date(
+    `${openDate}T${openH.toString().padStart(2, "0")}:${openMinute
+      .toString()
+      .padStart(2, "0")}:00`
+  );
+
+  const closeTime = new Date(
+    `${closeDate}T${closeH.toString().padStart(2, "0")}:${closeMinute
+      .toString()
+      .padStart(2, "0")}:00`
+  );
+
+  const now = new Date();
+
+  if (now >= openTime && now <= closeTime) {
+    window.location.href = "open.html";
+  } else {
+    window.location.href = "closed.html";
+  }
+</script>
+
+</body>
+</html>
